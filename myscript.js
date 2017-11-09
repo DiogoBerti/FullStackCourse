@@ -48,3 +48,20 @@ $('h1').click(function(){
 $('li').click(function(){
   $(this).text('New item');
 })
+
+$('#mover').keypress(function (event){
+  if(event.which === 13){
+    console.log(event);
+    $(this).color = 'blue';
+  }
+})
+
+$('#mover').on('dblclick', function(){
+  function complete(){
+    $('.container').eq(1).fadeIn(2000);
+  }
+
+  $(this).text('Clicked');
+  $('.container').eq(0).fadeOut(2000, complete);
+
+})
