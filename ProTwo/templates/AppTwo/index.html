@@ -3,12 +3,37 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Dark Souls</title>
+    <title>Webpages</title>
     <link rel="stylesheet" href="{% static "css/new.css" %}">
+
   </head>
   <body>
-    <h1>DARK SOULS REALM!!!!</h1>
-    <img src="{% static "img/Armas.jpg" %}" alt="Dark Souls">
+      <h1>Hi! Welcome to Django Level 2</h1>
+      <h2>Here are ur access records</h2>
+
+      <div class="djangtwo">
+        {% if access_records %}
+          <table>
+            <thead>
+              <th>Site Name</th>
+              <th>Date Access</th>
+            </thead>
+
+                    {% for acc in access_records %}
+                    <tr>
+                      <td>{{ acc.name }}</td>
+                      <td>{{ acc.date }}</td>
+                    </tr>
+                    {% endfor %}
+
+          </table>
+
+          {% else %}
+          <p>No acces Records found</p>
+
+          {% endif %}
+
+      </div>
 
   </body>
 </html>

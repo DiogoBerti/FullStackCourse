@@ -7,7 +7,7 @@ django.setup()
 # Fake Script
 
 import random
-from AppTwo.models import AccessRecord, Topic, Webpage
+from AppTwo.models import AccessRecord, Topic, Webpage, User
 from faker import Faker
 
 fakegen = Faker()
@@ -26,16 +26,24 @@ def populate(N=5):
         topic = add_topic()
 
         # Usa o Faker para criar os dados dos campos
-        fake_url = fakegen.url()
-        fake_date = fakegen.date()
-        fake_name = fakegen.company()
+        # fake_url = fakegen.url()
+        # fake_date = fakegen.date()
+        # fake_name = fakegen.company()
+        #
+        # webpg = Webpage.objects.get_or_create(topic=topic,
+        #                                         url=fake_url,
+        #                                         name=fake_name)[0]
+        #
+        # acc_rec = AccessRecord.objects.get_or_create(name=webpg,
+        #                                                 date=fake_date)[0]
 
-        webpg = Webpage.objects.get_or_create(topic=topic,
-                                                url=fake_url,
-                                                name=fake_name)[0]
+        fake_name = fakegen.name()
+        fake_lastname = fakegen.name()
+        fake_mail = fakegen.email()
 
-        acc_rec = AccessRecord.objects.get_or_create(name=webpg,
-                                                        date=fake_date)[0]
+        fake_user = User.objects.get_or_create(first_name=fake_name,
+                                                last_name=fake_lastname,
+                                                email=fake_mail)[0]
 
 if __name__ == '__main__':
     print('Populating Script!')
