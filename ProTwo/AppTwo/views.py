@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from AppTwo import forms
 from django.http import HttpResponse
 from AppTwo.models import Topic,Webpage,AccessRecord,User
 
@@ -19,3 +20,22 @@ def users(request):
     list_users = User.objects.order_by('first_name')
     user_dict = {'user_records': list_users}
     return render(request,'AppTwo/users.html',context=user_dict)
+
+def new_page(request):
+    return render(request,'AppTwo/new.html')
+
+def form_name_view(request):
+    form = forms.FormName()
+
+    if request.method == 'POST':
+        form = forms.FormName(request.POST)
+
+        if form.is_valid():
+            print('_____________')
+            print('Validating Data!')
+            print('name: {}'.format(form.cleaned_data['name']))
+            print('email: {}'.format(form.cleaned_data['email']))
+            print('Text: {}'.format(form.cleaned_data['text_area']))
+            print('_____________')
+
+    return render(request,'AppTwo/form_page.html',context={'form':form})
