@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from AppTwo import forms
 from django.http import HttpResponse
-from AppTwo.models import Topic,Webpage,AccessRecord,User
+from AppTwo.models import Topic,Webpage,AccessRecord,User,Monster
 
 
 # Create your views here.
@@ -39,3 +39,39 @@ def form_name_view(request):
             print('_____________')
 
     return render(request,'AppTwo/form_page.html',context={'form':form})
+
+def form_user(request):
+    form = forms.NewUserForm()
+
+    if request.method == 'POST':
+        form = forms.NewUserForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            print('_____________')
+            print('Validating Data!')
+            print('_____________')
+            return index(request)
+        else:
+            print('Error!')
+
+    return render(request,'AppTwo/user_input.html',context={'form':form})
+
+def form_monster(request):
+    form = forms.MonsterForm()
+    list_monsters = Monster.objects.order_by('name')
+    monster_dict = {'monster_records': list_monsters}
+    if request.method == 'POST':
+        form = forms.MonsterForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            print('_____________')
+            print('Validating Data!')
+            print('_____________')
+            return index(request)
+        else:
+            print('Error!')
+
+    return render(request,'AppTwo/user_input.html',context={'form':form,
+                                                            'monster_records': list_monsters})

@@ -28,10 +28,24 @@ class FormName(forms.Form):
             raise forms.ValidationError('Emails must Match!')
 
 
-
 # Não necessario pois o django ja possui validators
     # def clean_botcatcher(self):
     #     botcatcher = self.cleaned_data['botcatcher']
     #     if len(botcatcher) > 0:
     #         raise forms.ValidationError('Gotcha Bot!')
     #     return botcatcher
+
+# Segunda parte
+from AppTwo.models import User
+class NewUserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+from AppTwo.models import Monster
+class MonsterForm(forms.ModelForm):
+    class Meta:
+        model = Monster
+        fields = '__all__'

@@ -29,3 +29,12 @@ class User(models.Model):
     first_name = models.CharField(max_length=264)
     last_name = models.CharField(max_length=264)
     email = models.CharField(max_length=264, unique=True)
+
+class Monster(models.Model):
+    name = models.CharField(max_length=264)
+    breed = models.CharField(max_length=264)
+    species = models.CharField(max_length=264)
+    born = models.DateField()
+
+    def __str__(self):
+        return '{} : {} - {}'.format(self.species, self.name, self.breed)
