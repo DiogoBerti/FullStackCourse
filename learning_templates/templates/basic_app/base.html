@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Base Template inherits</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+     integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Navigation Bar-->
+    <!-- Funciona no bootstrap 4.0.... foi necessario adicionar o navbar-fixed-top -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
+      <a class="navbar-brand" href="{%url 'index'%}">BRAND</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <!-- <li class="nav-item active">
+            <a class="nav-link" href="#">BASE<span class="sr-only">(current)</span></a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index'%}">ADMIN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'basic_app:other'%}">OTHER</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--  -->
+
+    <div class="container">
+      {% block body_block %}
+      <!-- Tudo aqui será herdado -->
+      {% endblock %}
+    </div>
+
+  </body>
+</html>

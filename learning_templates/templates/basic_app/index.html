@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Welcome to Index</h1>
 
-  </body>
-</html>
+
+{% extends "basic_app/base.html"%}
+    <!-- Carregando meus metodos de templatetags my_extras -->
+    {% load my_extras %}
+    <!-- Começa o bloco herdado -->
+    {% block body_block%}
+
+    <h1>Welcome to Index</h1>
+    <h3>This is extendind Base</h3>
+
+    <!-- Usando filtros podemos editar alguns dados que vem do banco, como stringslice e adicionar valores a numeros -->
+    <h3>{{ text|new:'Hello' }}</h3>
+
+    <p>{{ number|add:"34" }}</p>
+    {% endblock %}
