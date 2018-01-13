@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from basic_app.forms import UserForm, UserProfileInfoForm
 
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 
 def index(request):
@@ -46,3 +52,35 @@ def register(request):
                                                         'profile_form':profile_form,
                                                         'registered':registered
                                                         })
+
+# Esse decorator checa se alguem está logado antes de chamar a função
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def special(request):
+    return HttpResponse('You re Logged in')
+
+def custom_user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('index'))
+
+            else:
+                return HttpResponse('Account not active!')
+        else:
+            print("Someone failed to login")
+            print('Username: {} \nPassword: {}'.format(username,password))
+            return HttpResponse('Invalid Login details...')
+
+    else:
+        return render(request,'basic_app/login.html',{})

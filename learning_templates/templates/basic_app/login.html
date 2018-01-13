@@ -1,0 +1,24 @@
+{% extends "basic_app/base.html"%}
+    <!-- Carregando meus metodos de templatetags my_extras -->
+    {% load my_extras %}
+
+    {% block body_block%}
+
+        <div class="jumbotron">
+            <h1>Please Login:</h1>
+
+            <form action="{% url 'basic_app:custom_user_login' %}" method="post">
+              {% csrf_token %}
+              <label for="userame">Username:</label>
+              <input type="text" name="username" value="Enter username...">
+
+              <label for="password">Password:</label>
+              <input type="password" name="password" >
+
+              <input type="submit" name="" value="Login">
+
+            </form>
+        </div>
+
+
+    {% endblock %}
