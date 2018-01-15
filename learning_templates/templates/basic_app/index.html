@@ -7,13 +7,8 @@
     <!-- Começa o bloco herdado -->
     {% block body_block%}
     <div class="jumbotron">
-      <h1>Welcome to Index</h1>
-      <h3>This is extendind Base</h3>
+      <h1>Welcome To Index</h1>
 
-      <!-- Usando filtros podemos editar alguns dados que vem do banco, como stringslice e adicionar valores a numeros -->
-      <h3>{{ text|new:'Hello' }}</h3>
-
-      <p>{{ number|add:"34" }}</p>
     </div>
 
     {% endblock %}
